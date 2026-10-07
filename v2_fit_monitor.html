@@ -229,6 +229,36 @@
   body.has-js .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){body.has-js .reveal{opacity:1;transform:none;transition:none}.btn:hover,.role:hover{transform:none}html{scroll-behavior:auto}}
   :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+  /* before/after flow chart */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:880px;margin:36px auto 0;text-align:left}
+  @media(max-width:700px){.ba{grid-template-columns:1fr;gap:30px}}
+  .bacol{display:flex;flex-direction:column;gap:7px}
+  .bahd{margin-bottom:5px}
+  .bahd .bk{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;padding:6px 13px;border-radius:7px;display:inline-block}
+  .bacol.no .bk{background:#ECEEEB;color:var(--tx-l-mute)}
+  .bacol.yes .bk{background:var(--amber-soft);color:var(--amber-deep)}
+  .bastep{border:1px solid var(--line-l);background:var(--card);border-radius:10px;padding:11px 15px;font-size:13.5px;font-weight:600;color:var(--tx-l);text-align:center;line-height:1.35}
+  .bacol.no .bastep{background:var(--paper);color:var(--tx-l-mute);font-weight:500}
+  .bacol.yes .bastep.hot{border-color:var(--amber);background:var(--amber-soft);color:var(--amber-deep)}
+  .bastep.sub{display:flex;flex-direction:column;gap:4px}
+  .bastep.sub span{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.02em;color:var(--tx-l-mute);text-transform:none;line-height:1.3}
+  .balink{text-align:center;font-size:13px;line-height:1;padding:1px 0}
+  .bacol.no .balink{color:#B4BCB4} .bacol.yes .balink{color:var(--amber)}
+  .baend{margin-top:11px;border-radius:11px;padding:14px 16px;font-size:13.5px;line-height:1.45}
+  .baend b{display:block;margin-bottom:3px;font-weight:700}
+  .baend.no{background:var(--crimson-soft)} .baend.no b{color:var(--crimson-deep)} .baend.no span{color:var(--tx-l-mute)}
+  .baend.yes{background:var(--amber-soft)} .baend.yes b{color:var(--amber-deep)}
+
+
+  .ba{align-items:start}
+  .bastep.sub.hot{display:flex;flex-direction:column;gap:4px;border-color:var(--amber);background:var(--amber-soft);color:var(--amber-deep)}
+  .bastep.sub.hot span{color:var(--amber-deep);opacity:.85}
+  .bacons{margin-top:12px;border-radius:12px;padding:15px 17px;font-size:13.5px;line-height:1.5}
+  .bacons .ck{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;margin-bottom:7px}
+  .bacons.no{background:var(--crimson-soft);color:var(--crimson-deep)} .bacons.no .ck{color:var(--crimson-deep);opacity:.85}
+  .bacons.yes{background:var(--teal-soft,#E4F2EF);color:var(--teal-deep,#0A5C54)} .bacons.yes .ck{color:var(--teal-deep,#0A5C54);opacity:.85}
+
 </style>
 </head>
 <body>
@@ -284,11 +314,43 @@
       <span class="eyebrow">Where Fit-to-Standard breaks down</span>
       <h2>The decision gets recorded. The judgment behind it is <em>harder to carry forward.</em></h2>
     </div>
-    <div class="reveal" style="max-width:62ch;margin:0 auto;text-align:center">
-      <p style="font-size:16px;color:var(--tx-l-mute);line-height:1.6;margin-bottom:16px">Fit decisions are made across workshops, workstreams and teams. The challenge is keeping the evidence, assumptions and judgment behind those calls available to everyone who has to review, or make, the next one.</p>
-      <p style="font-size:16px;color:var(--tx-l-mute);line-height:1.6">When that context is fragmented, teams reconstruct the same case, similar requirements get treated differently, and Fit-to-Standard becomes harder to govern consistently.</p>
+    <div class="reveal" style="max-width:60ch;margin:0 auto;text-align:center">
+      <p style="font-size:16px;color:var(--tx-l-mute);line-height:1.6">Fit decisions are made across workshops, workstreams and teams. When the evidence and judgment behind them are scattered, every reviewer has to reconstruct the case before they can make the next call.</p>
     </div>
-    <p class="punch reveal">Fit Monitor turns each assessment into a reviewable decision case.</p>
+    <div class="ba reveal">
+      <div class="bacol no">
+        <div class="bahd"><span class="bk">Without Fit Monitor</span></div>
+        <div class="bastep">Requirement enters</div>
+        <div class="balink">&darr;</div>
+        <div class="bastep sub">Evidence gathered manually<span>across SAP docs, programme artefacts, notes &amp; people</span></div>
+        <div class="balink">&darr;</div>
+        <div class="bastep">Consultant makes the fit assessment</div>
+        <div class="balink">&darr;</div>
+        <div class="bastep">Design Authority reviews the call</div>
+        <div class="balink">&darr;</div>
+        <div class="bastep">Decision recorded</div>
+        <div class="balink">&darr;</div>
+        <div class="bastep">Evidence &amp; judgment stay scattered</div>
+        <div class="bacons no"><span class="ck">Programme consequence</span>Later review has to reconstruct the case, similar requirements can be treated differently, and leadership has limited visibility into where Fit-to-Standard is drifting.</div>
+      </div>
+      <div class="bacol yes">
+        <div class="bahd"><span class="bk">With Fit Monitor</span></div>
+        <div class="bastep">Requirement enters</div>
+        <div class="balink">&darr;</div>
+        <div class="bastep sub hot">Fit Monitor's AI agents assemble the case<span>SAP evidence + programme knowledge + INNOVERV-shaped judgment</span></div>
+        <div class="balink">&darr;</div>
+        <div class="bastep">Classification + reasoning brought together</div>
+        <div class="balink">&darr;</div>
+        <div class="bastep">Design Authority reviews a prepared case</div>
+        <div class="balink">&darr;</div>
+        <div class="bastep hot">Decision + evidence + rationale retained</div>
+        <div class="balink">&darr;</div>
+        <div class="bastep">Judgment stays available as programme context</div>
+        <div class="bacons yes"><span class="ck">Programme consequence</span>Fit decisions are easier to review consistently, and leadership can see where Fit-to-Standard is holding, and where attention is needed.</div>
+      </div>
+    </div>
+    <p class="punch reveal" style="max-width:38ch">The reviewer gets the case, not just the conclusion.</p>
+    <p class="reveal" style="text-align:center;max-width:56ch;margin:14px auto 0;font-size:15px;color:var(--tx-l-mute);line-height:1.55">Give leadership a consistent, reviewable view of how Fit-to-Standard is being applied across the programme.</p>
   </div>
 </section>
 
